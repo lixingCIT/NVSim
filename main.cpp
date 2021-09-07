@@ -129,6 +129,7 @@ int main(int argc, char *argv[])
 
 	ofstream outputFile;
 	string outputFileName;
+	// check into internal sensing
 	if (inputParameter->optimizationTarget == full_exploration) {
 		stringstream temp;
 		temp << inputParameter->outputFilePrefix << "_" << inputParameter->capacity / 1024 << "K_" << inputParameter->wordWidth
