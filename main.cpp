@@ -91,6 +91,7 @@ int main(int argc, char *argv[])
 	RESTORE_SEARCH_SIZE;
 	inputParameter->ReadInputParameterFromFile(inputFileName);
 
+	// Define the technology node
 	tech = new Technology();
 	tech->Initialize(inputParameter->processNode, inputParameter->deviceRoadmap);
 
