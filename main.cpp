@@ -149,21 +149,33 @@ int main(int argc, char *argv[])
 
 	cell->PrintCell();
 
+	// Some constraints in this simulator or architecture estimation must be complied
 	applyConstraint();
 
+	// Parameter of MAT
 	int numRowMat, numColumnMat, numActiveMatPerRow, numActiveMatPerColumn;
+
+	// Parameter of Subarray
 	int numRowSubarray, numColumnSubarray, numActiveSubarrayPerRow, numActiveSubarrayPerColumn;
+
+	// Other parameters involved with construction
 	int muxSenseAmp, muxOutputLev1, muxOutputLev2, numRowPerSet;
 	int areaOptimizationLevel;							/* actually BufferDesignTarget */
 	int localWireType, globalWireType;					/* actually WireType */
 	int localWireRepeaterType, globalWireRepeaterType;	/* actually WireRepeaterType */
+
+	// Wire low swing setting
 	int isLocalWireLowSwing, isGlobalWireLowSwing;		/* actually boolean value */
 
+	// Both cache or memory
 	long long capacity;
 	long blockSize;
+
+	// Following is for cache infrastructure
 	int associativity;
 
 	/* for cache data array, memory array */
+	// ?What is full exploration
 	Result bestDataResults[(int)full_exploration];	/* full_exploration is always set as the last element in the enum, so if full_exploration is 8, what we want here is a 0-7 array, which is correct */
 	Bank *dataBank;
 	for (int i = 0; i < (int)full_exploration; i++)
