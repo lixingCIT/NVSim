@@ -34,6 +34,8 @@
 *                     Website: http://www.cse.psu.edu/~xydong/ )
 *******************************************************************************/
 
+// Commented by LX, current file is used for setting some parameter on wire
+//	these parameters commonly describe the properties of wire in NV memory
 
 #include "Wire.h"
 #include "global.h"
@@ -79,9 +81,12 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 	/* Initialize copper resistivity */
 
 	if (_featureSizeInNano <= 22) {
+		// unit of 22 is nanometer, that is, 10^-9 meters
 		featureSize = 22e-9;
 		switch (wireType) {
 		case local_aggressive:
+			// ?what is local aggressive
+			//	- aggressive is used to depict the properties
 			barrierThickness = 0.00e-6;
 			horizontalDielectric = 2.55;
 			wirePitch = 2 * featureSize;
@@ -90,6 +95,8 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 			copper_resistivity =  6.0e-8;
 			break;
 		case local_conservative:
+			// ?what is local conservative
+			//	- conservative is contrary to aggressive
 			barrierThickness = 0.0021e-6;
 			horizontalDielectric = 3;
 			wirePitch = 2 * featureSize;
@@ -98,6 +105,7 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 			copper_resistivity =  6.0e-8;
 			break;
 		case semi_aggressive:
+			// semi-aggressive is in mid of aggressive and conservative
 			barrierThickness = 0.00e-6;
 			horizontalDielectric = 2.55;
 			wirePitch = 4 * featureSize;
@@ -106,6 +114,7 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 			copper_resistivity =  6.0e-8;
 			break;
 		case semi_conservative:
+			// To some extent, same as semi-aggressive
 			barrierThickness = 0.0021e-6;
 			horizontalDielectric = 3;
 			wirePitch = 4 * featureSize;
@@ -468,9 +477,11 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 			ildThickness = 0e-6;
 		}
 	}
-
+	// Width of wire is half of pitch's
 	wireWidth = wirePitch / 2;
+	// aspectRadtio and wireWidth jointly determine the thickness of wire
 	wireThickness = aspectRatio * wireWidth;
+	// wireSpacing refers to space with no metal, just as null
 	wireSpacing = wirePitch - wireWidth;
 
 	/* TO-DO: here we only support copper wire, aluminum is to be added */
@@ -482,11 +493,13 @@ void Wire::Initialize(int _featureSizeInNano, WireType _wireType, WireRepeaterTy
 		ildThickness, 1.5 /* miller value */, horizontalDielectric, 3.9 /* Vertical Dielectric */,
 		1.15e-10 /* Fringe Capacitance (Unit: F/m), TO-DO: CACTI assumes a fixed number here */);
 
+	// Set wire repeater that relay signal in wire
 	if (wireRepeaterType != repeated_none) {
 		/* If the repeaters are inserted in the wire */
 		findOptimalRepeater();
 		if (wireRepeaterType != repeated_opt) {
 			/* The repeated wire is not fully latency optimized */
+			// some penalty comes with wire repeater
 			double penalty;
 			switch (wireRepeaterType) {
 			case repeated_5:

@@ -482,7 +482,7 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
+// Not support some types of memory
 void applyConstraint() {
 	/* Check functions that are not yet implemented */
 	if (inputParameter->designTarget == CAM_chip) {
