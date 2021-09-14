@@ -35,6 +35,8 @@
 *******************************************************************************/
 
 
+
+// MACRO is the compact block of some fixed objects
 #ifndef MACROS_H_
 #define MACROS_H_
 

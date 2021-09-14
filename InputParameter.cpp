@@ -34,7 +34,7 @@
 *                     Website: http://www.cse.psu.edu/~xydong/ )
 *******************************************************************************/
 
-
+// This InputParameter.cpp file is used to transfer parameters from the nvsim.cfg  file into some  variables
 #include "InputParameter.h"
 #include "global.h"
 #include "constant.h"
@@ -416,7 +416,10 @@ void InputParameter::ReadInputParameterFromFile(const std::string & inputFile) {
 			continue;
 		}
 
+		// Initialize the basic constructure of the Mat, with nvsim.cfg file
+		// Acquire some parameters from the nvsim.cfg file
 		if (!strncmp("-ForceBank", line, strlen("-ForceBank"))) {
+			// Put four %d into minNumRowMat, minNumColumnMat, minNumActiveMatPerColum, minNumActiveMatPerRow from line
 			sscanf(line, "-ForceBank (Total AxB, Active CxD): %dx%d, %dx%d",
 					&minNumRowMat, &minNumColumnMat, &minNumActiveMatPerColumn, &minNumActiveMatPerRow);
 			maxNumRowMat = minNumRowMat;

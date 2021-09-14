@@ -132,6 +132,8 @@ int main(int argc, char *argv[])
 	// check into internal sensing
 	if (inputParameter->optimizationTarget == full_exploration) {
 		stringstream temp;
+		// Here, temp  is  a type of stringstream
+		// We can use << operator to input some data  into temp, as a object of stringstream
 		temp << inputParameter->outputFilePrefix << "_" << inputParameter->capacity / 1024 << "K_" << inputParameter->wordWidth
 				<< "_" << inputParameter->associativity;
 		if (inputParameter->internalSensing)
@@ -141,9 +143,16 @@ int main(int argc, char *argv[])
 		if (cell->readMode)
 			temp << "_VOL";
 		else
+		// What is short of _CUR
 			temp << "_CUR";
 		temp << ".csv";
+		// Here, outputFileName is a type of string
+		// temp.str() is a member function located in temp object
+		// temp is stringstream object
+		// so the xxx.str() is member function from stringstream class
 		outputFileName = temp.str();
+		// outputFileName is a type of string
+		// ofstream::app means that add new into the tail of file for all new addings
 		outputFile.open(outputFileName.c_str(), ofstream::app);
 	}
 
